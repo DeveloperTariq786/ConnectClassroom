@@ -49,7 +49,7 @@ const OwnerCta: React.FC = () => {
                    <p className="text-blue-100 mb-6 text-sm">Join 500+ institutes growing with ClassroomConnect.</p>
                    
                    <div className="space-y-4">
-                     <button className="w-full bg-white text-indigo-700 font-bold text-base py-3 rounded-xl shadow-lg hover:bg-blue-50 hover:shadow-xl transition-all duration-200 flex items-center justify-center group">
+                     <button className="w-full bg-white text-slate-900 font-bold text-base py-3 rounded-xl shadow-lg hover:bg-gray-50 hover:shadow-xl transition-all duration-200 flex items-center justify-center group">
                         Register Institute for Free
                         <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                      </button>
