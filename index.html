@@ -27,37 +27,31 @@
                 800: '#075985',
                 900: '#0c4a6e',
               }
+            },
+            keyframes: {
+              'fade-in-down': {
+                '0%': { opacity: '0', transform: 'translateY(-10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
+            },
+            animation: {
+              'fade-in-down': 'fade-in-down 0.3s ease-out forwards',
             }
           }
         }
       }
     </script>
-    <style>
-      /* Hide scrollbar globally for a cleaner app-like feel */
-      ::-webkit-scrollbar {
-          width: 0px;
-          background: transparent;
-      }
-      
-      html {
-          scrollbar-width: none;
-      }
-
-      body {
-          -ms-overflow-style: none;
-          overflow-x: hidden; /* Prevent horizontal scroll causing whitespace */
-      }
-    </style>
   <script type="importmap">
 {
   "imports": {
     "react": "https://esm.sh/react@18.2.0",
     "react-dom": "https://esm.sh/react-dom@18.2.0",
-    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
     "lucide-react": "https://esm.sh/lucide-react@0.344.0",
     "framer-motion": "https://esm.sh/framer-motion@11.0.8",
     "react-router-dom": "https://esm.sh/react-router-dom@6.22.3?deps=react@18.2.0,react-dom@18.2.0",
-    "react/": "https://esm.sh/react@^19.2.3/"
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/"
   }
 }
 </script>
