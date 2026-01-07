@@ -208,38 +208,10 @@ const TuitionDetail: React.FC = () => {
 
           </div>
 
-          {/* Sidebar / Contact Form */}
+          {/* Sidebar / Contact Info */}
           <div className="lg:col-span-1">
             <div className="bg-white rounded-2xl shadow-md border border-gray-200 p-6 sticky top-24">
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Interested in this Center?</h3>
-              <p className="text-slate-500 text-sm mb-6">Fill the form to book a free demo class or request a call back.</p>
-
-              <form className="space-y-4">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">Student Name</label>
-                  <input type="text" className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none transition-all text-sm" placeholder="Enter full name" />
-                </div>
-                
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">Phone Number</label>
-                  <input type="tel" className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none transition-all text-sm" placeholder="Enter mobile number" />
-                </div>
-
-                <div>
-                   <label className="block text-xs font-semibold text-slate-700 uppercase mb-1">Course Interest</label>
-                   <select className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none transition-all text-sm">
-                     <option>Select a course</option>
-                     {tuition.courses?.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
-                     <option value="General Inquiry">General Inquiry</option>
-                   </select>
-                </div>
-
-                <button type="button" className="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-3 rounded-xl shadow-lg hover:shadow-xl transition-all mt-4">
-                  Book Free Demo
-                </button>
-              </form>
-
-              <div className="mt-6 pt-6 border-t border-gray-100">
+                 <h3 className="text-lg font-bold text-slate-900 mb-4">Contact Information</h3>
                  {tuition.address && (
                    <div className="flex items-start text-sm text-slate-600 mb-3">
                       <MapPin size={16} className="mr-3 mt-0.5 text-gray-400 flex-shrink-0" />
@@ -254,7 +226,6 @@ const TuitionDetail: React.FC = () => {
                     <Mail size={16} className="mr-3 text-gray-400" />
                     <span>enquiry@classroomconnect.com</span>
                  </div>
-              </div>
             </div>
           </div>
 
