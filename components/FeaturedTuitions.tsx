@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, MapPin, CheckCircle, Wifi, Users } from 'lucide-react';
+import { Star, MapPin } from 'lucide-react';
 import * as ReactRouterDOM from 'react-router-dom';
 import { FEATURED_TUITIONS } from '../constants';
 
@@ -24,7 +24,7 @@ const FeaturedTuitions: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {FEATURED_TUITIONS.map((tuition) => (
-            <div key={tuition.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 group">
+            <div key={tuition.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 group flex flex-col">
               {/* Card Image */}
               <div className="relative h-48 overflow-hidden">
                 <img 
@@ -37,25 +37,19 @@ const FeaturedTuitions: React.FC = () => {
                   <span className="ml-1 text-xs font-bold text-slate-800">{tuition.rating}</span>
                   <span className="ml-1 text-xs text-slate-500">({tuition.reviewCount})</span>
                 </div>
-                {tuition.mode.includes("Home Access") && (
-                   <div className="absolute bottom-3 left-3 bg-indigo-600 text-white text-xs font-medium px-2.5 py-1 rounded-md shadow-lg flex items-center">
-                     <Wifi className="w-3 h-3 mr-1.5" />
-                     Home Access Included
-                   </div>
-                )}
+                
+                {/* Mode Badge */}
+                <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm text-slate-800 text-xs font-bold px-2.5 py-1 rounded-lg shadow-sm">
+                  {tuition.mode.includes("Home") ? "Hybrid" : "Offline"}
+                </div>
               </div>
 
               {/* Card Content */}
-              <div className="p-5">
+              <div className="p-5 flex flex-col flex-grow">
                 <div className="flex justify-between items-start mb-2">
                   <Link to={`/tuitions/${tuition.id}`} className="text-lg font-bold text-slate-900 leading-tight group-hover:text-primary-600 transition-colors block">
                     {tuition.name}
                   </Link>
-                  {tuition.isVerified && (
-                    <div className="tooltip" title="Verified Institute">
-                      <CheckCircle className="w-5 h-5 text-blue-500" />
-                    </div>
-                  )}
                 </div>
 
                 <div className="flex items-center text-slate-500 text-sm mb-4">
@@ -77,13 +71,9 @@ const FeaturedTuitions: React.FC = () => {
                   )}
                 </div>
 
-                <div className="border-t border-gray-100 pt-4 mt-auto flex items-center justify-between">
-                   <div className="flex items-center text-slate-500 text-xs">
-                      <Users className="w-3.5 h-3.5 mr-1" />
-                      <span>Small Batches</span>
-                   </div>
-                   <Link to={`/tuitions/${tuition.id}`} className="text-primary-600 text-sm font-semibold hover:underline">
-                     View Details
+                <div className="mt-auto pt-4 border-t border-gray-100">
+                   <Link to={`/tuitions/${tuition.id}`} className="block w-full py-2.5 text-center bg-primary-50 hover:bg-primary-600 text-primary-700 hover:text-white rounded-xl font-semibold transition-all duration-300">
+                     Explore
                    </Link>
                 </div>
               </div>
