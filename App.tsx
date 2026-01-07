@@ -1,10 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import * as ReactRouterDOM from 'react-router-dom';
 import Navbar from './components/Navbar';
 import LandingPage from './components/LandingPage';
 import FindTuitions from './components/FindTuitions';
 import TuitionDetail from './components/TuitionDetail';
 import Footer from './components/Footer';
+
+const { BrowserRouter, Routes, Route } = ReactRouterDOM;
 
 function App() {
   return (

@@ -1,7 +1,9 @@
 import React from 'react';
 import { Star, MapPin, CheckCircle, Wifi, Users } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import * as ReactRouterDOM from 'react-router-dom';
 import { FEATURED_TUITIONS } from '../constants';
+
+const { Link } = ReactRouterDOM;
 
 const FeaturedTuitions: React.FC = () => {
   return (

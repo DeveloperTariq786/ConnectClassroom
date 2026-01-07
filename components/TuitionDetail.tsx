@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import * as ReactRouterDOM from 'react-router-dom';
 import { MapPin, Star, CheckCircle, Wifi, Users, BookOpen, User, Phone, Mail, Clock, ShieldCheck, ChevronRight } from 'lucide-react';
 import { FEATURED_TUITIONS } from '../constants';
+
+const { useParams, Link } = ReactRouterDOM;
 
 const TuitionDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();

@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import * as ReactRouterDOM from 'react-router-dom';
 import Hero from './Hero';
 import Categories from './Categories';
 import FeaturedTuitions from './FeaturedTuitions';
 import HowItWorks from './HowItWorks';
 import TrustSection from './TrustSection';
 import OwnerCta from './OwnerCta';
+
+const { useLocation } = ReactRouterDOM;
 
 const LandingPage: React.FC = () => {
   const { hash } = useLocation();

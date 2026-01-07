@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Search, MapPin, Filter, Star, CheckCircle, Wifi, Users, ChevronDown, SlidersHorizontal } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import * as ReactRouterDOM from 'react-router-dom';
 import { FEATURED_TUITIONS, CATEGORIES } from '../constants';
+
+const { Link } = ReactRouterDOM;
 
 const FindTuitions: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
