@@ -38,10 +38,12 @@ const FeaturedTuitions: React.FC = () => {
                   <span className="ml-1 text-xs text-slate-500">({tuition.reviewCount})</span>
                 </div>
                 
-                {/* Mode Badge */}
-                <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm text-slate-800 text-xs font-bold px-2.5 py-1 rounded-lg shadow-sm">
-                  {tuition.mode.includes("Home") ? "Hybrid" : "Offline"}
-                </div>
+                {/* Mode Badge - Only show if Hybrid/Online */}
+                {tuition.mode.includes("Home") && (
+                  <div className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm text-indigo-600 text-xs font-bold px-2.5 py-1 rounded-lg shadow-sm border border-indigo-50">
+                    Hybrid
+                  </div>
+                )}
               </div>
 
               {/* Card Content */}
@@ -72,7 +74,7 @@ const FeaturedTuitions: React.FC = () => {
                 </div>
 
                 <div className="mt-auto pt-4 border-t border-gray-100">
-                   <Link to={`/tuitions/${tuition.id}`} className="block w-full py-2.5 text-center bg-primary-50 hover:bg-primary-600 text-primary-700 hover:text-white rounded-xl font-semibold transition-all duration-300">
+                   <Link to={`/tuitions/${tuition.id}`} className="block w-full py-3 text-center bg-primary-600 text-white hover:bg-primary-700 rounded-xl font-bold transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5">
                      Explore
                    </Link>
                 </div>
