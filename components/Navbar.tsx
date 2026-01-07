@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Menu, X, MapPin, User } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Menu, X, User, LogOut, BookOpen } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  // Auth states (Simulation)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -21,7 +27,19 @@ const Navbar: React.FC = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    
+    // Click outside listener for profile menu
+    const handleClickOutside = (event: MouseEvent) => {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(event.target as Node)) {
+        setIsProfileMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -40,11 +58,27 @@ const Navbar: React.FC = () => {
     }
   };
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    // For mobile, we might want to close the menu or keep it open to show the new state. 
+    // Closing it is usually better UX so they see the result on the navbar (or stay in menu if simulated).
+    // Let's keep mobile menu logic simple.
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setIsProfileMenuOpen(false);
+  };
+
   // Use scrolled style always if not on home page
   const navStyle = !isHome || isScrolled ? 'bg-white shadow-md py-3' : 'bg-transparent py-5';
   const textStyle = !isHome || isScrolled ? 'text-slate-900' : 'text-white';
   const linkStyle = !isHome || isScrolled ? 'text-slate-600' : 'text-slate-100';
   const buttonIconStyle = !isHome || isScrolled ? 'text-slate-900 hover:bg-gray-100' : 'text-white hover:bg-white/10';
+  // Specific style for the profile button to ensure it looks good on dark/light backgrounds
+  const profileButtonStyle = !isHome || isScrolled 
+    ? 'text-slate-700 bg-gray-100 hover:bg-gray-200' 
+    : 'text-white bg-white/20 hover:bg-white/30';
 
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${navStyle}`}>
@@ -73,12 +107,44 @@ const Navbar: React.FC = () => {
             </button>
             
             <div className="flex items-center space-x-4 ml-4">
-              <button className={`p-2 rounded-full transition-colors ${buttonIconStyle}`}>
-                <User size={20} />
-              </button>
-              <button className={`text-sm font-medium px-4 py-2 rounded-full transition-colors ${buttonIconStyle}`}>
-                Log in
-              </button>
+              
+              {isLoggedIn ? (
+                <div className="relative" ref={profileMenuRef}>
+                   <button 
+                     onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                     className={`p-2 rounded-full transition-colors flex items-center justify-center ${profileButtonStyle}`}
+                   >
+                     <User size={20} />
+                   </button>
+                   
+                   {/* Profile Dropdown */}
+                   {isProfileMenuOpen && (
+                     <div className="absolute right-0 mt-3 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 animate-fade-in-down origin-top-right ring-1 ring-black ring-opacity-5">
+                       <div className="px-4 py-3 border-b border-gray-50 mb-1">
+                         <p className="text-sm font-bold text-slate-900">Student User</p>
+                         <p className="text-xs text-slate-500 truncate">student@classroomconnect.com</p>
+                       </div>
+                       <a href="#" className="block px-4 py-2.5 text-sm text-slate-700 hover:bg-gray-50 hover:text-primary-600 flex items-center transition-colors">
+                         <BookOpen size={16} className="mr-3 text-slate-400" /> My Coaching
+                       </a>
+                       <button 
+                         onClick={handleLogout}
+                         className="block w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 flex items-center transition-colors"
+                       >
+                         <LogOut size={16} className="mr-3" /> Logout
+                       </button>
+                     </div>
+                   )}
+                </div>
+              ) : (
+                <button 
+                  onClick={handleLogin}
+                  className={`text-sm font-medium px-4 py-2 rounded-full transition-colors ${buttonIconStyle}`}
+                >
+                  Log in
+                </button>
+              )}
+              
               <button className="bg-primary-600 hover:bg-primary-700 text-white text-sm font-medium px-5 py-2.5 rounded-full transition-all shadow-lg hover:shadow-xl">
                 Partner with us
               </button>
@@ -108,10 +174,38 @@ const Navbar: React.FC = () => {
             >
               How it Works
             </button>
+            
             <div className="pt-4 border-t border-gray-100 flex flex-col gap-3">
-              <button className="w-full text-center py-3 text-slate-700 font-medium hover:bg-gray-50 rounded-lg">
-                Log in
-              </button>
+              {isLoggedIn ? (
+                 <>
+                   <div className="px-3 py-3 flex items-center gap-3 bg-gray-50 rounded-lg mb-2">
+                      <div className="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center text-primary-600">
+                        <User size={20} />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-slate-900">Student User</p>
+                        <p className="text-xs text-slate-500">student@classroomconnect.com</p>
+                      </div>
+                   </div>
+                   <button className="w-full text-left px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:bg-gray-50 flex items-center">
+                      <BookOpen size={18} className="mr-3 text-slate-400" /> My Coaching
+                   </button>
+                   <button 
+                     onClick={() => { handleLogout(); setIsMobileMenuOpen(false); }}
+                     className="w-full text-left px-3 py-3 rounded-md text-base font-medium text-red-600 hover:bg-red-50 flex items-center"
+                   >
+                     <LogOut size={18} className="mr-3" /> Logout
+                   </button>
+                 </>
+              ) : (
+                <button 
+                  onClick={() => { handleLogin(); setIsMobileMenuOpen(false); }}
+                  className="w-full text-center py-3 text-slate-700 font-medium hover:bg-gray-50 rounded-lg border border-gray-200"
+                >
+                  Log in
+                </button>
+              )}
+              
               <button className="w-full text-center py-3 bg-primary-600 text-white font-medium rounded-lg shadow-md">
                 Register Institute
               </button>
