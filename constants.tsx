@@ -4,21 +4,27 @@ import { BookOpen, GraduationCap, Microscope, Calculator, Briefcase, Landmark, P
 export const CAROUSEL_SLIDES: CarouselSlide[] = [
   {
     id: 1,
-    title: "Your Local Tuition, Now Online",
-    subtitle: "Discover trusted coaching centers near you and stay connected from home.",
-    imageUrl: "https://picsum.photos/id/10/1920/1080" // Nature/forest often doubles as calm background, but let's try to simulate 'place'
+    title: "Elite Science Academy",
+    subtitle: "Premier coaching for JEE & NEET in Koramangala. Join the toppers' league today.",
+    imageUrl: "https://picsum.photos/id/10/1920/1080", // Nature/forest often doubles as calm background, but let's try to simulate 'place'
+    tuitionId: "t1",
+    buttonText: "View Institute Details"
   },
   {
     id: 2,
-    title: "Offline Classes. Online Access.",
-    subtitle: "Registered tuitions share notes, videos, and updates with students digitally.",
-    imageUrl: "https://picsum.photos/id/20/1920/1080" // Desk/Work
+    title: "Sharma Mathematics Circle",
+    subtitle: "Expert math coaching in Andheri West. Specialized batches for Class 10 & 12 Boards.",
+    imageUrl: "https://picsum.photos/id/20/1920/1080", // Desk/Work
+    tuitionId: "t3",
+    buttonText: "Explore Courses"
   },
   {
     id: 3,
-    title: "Find the Right Coaching for Every Exam",
-    subtitle: "School, NEET, JEE, CUET, UPSC & more.",
-    imageUrl: "https://picsum.photos/id/24/1920/1080" // Books
+    title: "Civil Services Marg",
+    subtitle: "Start your UPSC journey with experienced mentors in Mukherjee Nagar. Comprehensive study material included.",
+    imageUrl: "https://picsum.photos/id/24/1920/1080", // Books
+    tuitionId: "t4",
+    buttonText: "Start Preparation"
   }
 ];
 

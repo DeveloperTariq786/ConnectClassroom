@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import * as ReactRouterDOM from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import { CAROUSEL_SLIDES } from '../constants';
+
+const { Link } = ReactRouterDOM;
 
 const Hero: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -11,6 +15,8 @@ const Hero: React.FC = () => {
     }, 5000); // 5 seconds per slide
     return () => clearInterval(timer);
   }, []);
+
+  const slide = CAROUSEL_SLIDES[currentSlide];
 
   return (
     <div className="relative h-[600px] lg:h-[700px] w-full overflow-hidden bg-slate-900">
@@ -28,7 +34,7 @@ const Hero: React.FC = () => {
           {/* Overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/30 z-10" />
           <img
-            src={CAROUSEL_SLIDES[currentSlide].imageUrl}
+            src={slide.imageUrl}
             alt="Hero Background"
             className="w-full h-full object-cover object-center transform scale-105"
             style={{ filter: 'brightness(0.8)' }}
@@ -42,27 +48,50 @@ const Hero: React.FC = () => {
         {/* Text Content */}
         <div className="max-w-3xl">
           <AnimatePresence mode='wait'>
-            <motion.h1
-              key={`title-${currentSlide}`}
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -20, opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight tracking-tight"
-            >
-              {CAROUSEL_SLIDES[currentSlide].title}
-            </motion.h1>
+            <div className="overflow-hidden">
+                <motion.h1
+                key={`title-${currentSlide}`}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -20, opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight tracking-tight"
+                >
+                {slide.title}
+                </motion.h1>
+            </div>
 
-            <motion.p
-              key={`sub-${currentSlide}`}
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -20, opacity: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-lg md:text-xl text-slate-200 mb-8 max-w-2xl"
-            >
-              {CAROUSEL_SLIDES[currentSlide].subtitle}
-            </motion.p>
+            <div className="overflow-hidden">
+                <motion.p
+                key={`sub-${currentSlide}`}
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -20, opacity: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-lg md:text-xl text-slate-200 mb-8 max-w-2xl"
+                >
+                {slide.subtitle}
+                </motion.p>
+            </div>
+
+            {/* Button */}
+            {slide.tuitionId && (
+                 <motion.div
+                    key={`btn-${currentSlide}`}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -20, opacity: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                 >
+                    <Link 
+                        to={`/tuitions/${slide.tuitionId}`}
+                        className="inline-flex items-center px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-full transition-all shadow-lg hover:shadow-primary-500/30 hover:-translate-y-1 group"
+                    >
+                        {slide.buttonText || "View Details"}
+                        <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                 </motion.div>
+            )}
           </AnimatePresence>
         </div>
 

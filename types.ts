@@ -55,4 +55,6 @@ export interface CarouselSlide {
   title: string;
   subtitle: string;
   imageUrl: string;
+  tuitionId?: string;
+  buttonText?: string;
 }
