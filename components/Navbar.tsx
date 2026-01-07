@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, MapPin, User } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Check if we are on the home page
   const isHome = location.pathname === '/';
@@ -22,6 +23,22 @@ const Navbar: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    setIsMobileMenuOpen(false);
+    
+    if (!isHome) {
+      // Navigate to home with hash
+      navigate(`/#${sectionId}`);
+      return;
+    }
+
+    // If on home, scroll directly
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   // Use scrolled style always if not on home page
   const navStyle = !isHome || isScrolled ? 'bg-white shadow-md py-3' : 'bg-transparent py-5';
@@ -48,7 +65,12 @@ const Navbar: React.FC = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             <Link to="/find-tuitions" className={`text-sm font-medium hover:text-primary-500 transition-colors ${linkStyle}`}>Find Tuitions</Link>
-            <a href="#" className={`text-sm font-medium hover:text-primary-500 transition-colors ${linkStyle}`}>How it Works</a>
+            <button 
+              onClick={() => scrollToSection('how-it-works')} 
+              className={`text-sm font-medium hover:text-primary-500 transition-colors ${linkStyle} bg-transparent border-0 cursor-pointer`}
+            >
+              How it Works
+            </button>
             
             <div className="flex items-center space-x-4 ml-4">
               <button className={`p-2 rounded-full transition-colors ${buttonIconStyle}`}>
@@ -80,7 +102,12 @@ const Navbar: React.FC = () => {
         <div className="md:hidden bg-white absolute w-full shadow-xl border-t border-gray-100 animate-fade-in-down">
           <div className="px-4 pt-2 pb-6 space-y-1">
             <Link to="/find-tuitions" className="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-primary-600 hover:bg-gray-50" onClick={() => setIsMobileMenuOpen(false)}>Find Tuitions</Link>
-            <a href="#" className="block px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-primary-600 hover:bg-gray-50">How it Works</a>
+            <button 
+              onClick={() => scrollToSection('how-it-works')}
+              className="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-slate-700 hover:text-primary-600 hover:bg-gray-50"
+            >
+              How it Works
+            </button>
             <div className="pt-4 border-t border-gray-100 flex flex-col gap-3">
               <button className="w-full text-center py-3 text-slate-700 font-medium hover:bg-gray-50 rounded-lg">
                 Log in

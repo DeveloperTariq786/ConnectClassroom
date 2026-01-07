@@ -1,33 +1,69 @@
 import React from 'react';
+import { CheckCircle, ArrowRight } from 'lucide-react';
 
 const OwnerCta: React.FC = () => {
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-br from-primary-600 to-indigo-700 rounded-3xl p-8 md:p-16 text-center shadow-2xl relative overflow-hidden">
+    <section className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-r from-primary-700 via-primary-600 to-indigo-800 rounded-3xl overflow-hidden shadow-2xl relative">
           
-          {/* Background Patterns */}
-          <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
-             <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-white blur-3xl"></div>
-             <div className="absolute bottom-10 right-10 w-48 h-48 rounded-full bg-white blur-3xl"></div>
+          {/* Abstract Background Patterns */}
+          <div className="absolute inset-0 opacity-10">
+             <div className="absolute top-0 right-0 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+             <div className="absolute bottom-0 left-0 w-72 h-72 bg-indigo-300 rounded-full mix-blend-overlay filter blur-3xl transform -translate-x-1/3 translate-y-1/3"></div>
           </div>
-
-          <div className="relative z-10">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Run an Offline Tuition?</h2>
-            <p className="text-lg md:text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
-              Bring your institute online without losing your offline identity. Manage students, share notes, and grow your presence in your city.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <button className="bg-white text-primary-700 font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-gray-50 hover:scale-105 transition-all duration-200">
-                Register Your Tuition
-              </button>
-              <button className="bg-primary-800/50 backdrop-blur-sm border border-primary-500 text-white font-medium text-lg px-8 py-4 rounded-xl hover:bg-primary-800 transition-all duration-200">
-                Book a Demo
-              </button>
+          
+          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center p-10 md:p-16">
+            
+            {/* Text Content */}
+            <div className="text-left">
+               <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/30 border border-blue-400/30 text-blue-50 font-medium text-sm mb-6">
+                 For Institute Owners
+               </span>
+               <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+                 Scale Your Offline Center with <span className="text-blue-200">Digital Power</span>
+               </h2>
+               <p className="text-lg text-blue-100 mb-8 max-w-lg leading-relaxed">
+                 Don't just compete—dominate your local market. Get a premium listing, manage batches digitally, and provide students with a modern hybrid learning experience.
+               </p>
+               
+               <ul className="space-y-4 mb-8">
+                  {[
+                    'Premium listing with "Verified" badge',
+                    'Student management dashboard & fee reminders',
+                    'Upload notes, videos & conduct online tests',
+                    'Direct inquiries from local students'
+                  ].map((item, index) => (
+                    <li key={index} className="flex items-center text-white/90 font-medium">
+                      <CheckCircle className="w-5 h-5 mr-3 text-cyan-300 flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+               </ul>
             </div>
-            <p className="mt-6 text-sm text-blue-200/80">
-              Free to list. No hidden charges for basic profile.
-            </p>
+
+            {/* CTA Card / Visual */}
+            <div className="relative">
+                <div className="bg-white/10 backdrop-blur-md p-8 md:p-10 rounded-2xl border border-white/20 text-center shadow-xl">
+                   <h3 className="text-2xl font-bold text-white mb-2">Partner with us</h3>
+                   <p className="text-blue-100 mb-8 text-sm">Join 500+ institutes growing with ClassroomConnect.</p>
+                   
+                   <div className="space-y-4">
+                     <button className="w-full bg-white text-indigo-700 font-bold text-lg py-4 rounded-xl shadow-lg hover:bg-blue-50 hover:shadow-xl transition-all duration-200 flex items-center justify-center group">
+                        Register Institute for Free
+                        <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                     </button>
+                     <button className="w-full bg-transparent border border-white/40 text-white font-semibold text-lg py-4 rounded-xl hover:bg-white/10 transition-all duration-200">
+                        Request a Demo
+                     </button>
+                   </div>
+                   
+                   <p className="mt-6 text-xs text-blue-200/60">
+                     No credit card required. Setup takes less than 5 minutes.
+                   </p>
+                </div>
+            </div>
+
           </div>
         </div>
       </div>
