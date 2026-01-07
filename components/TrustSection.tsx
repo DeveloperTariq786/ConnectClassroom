@@ -40,7 +40,7 @@ const TrustSection: React.FC = () => {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-slate-50 border-t border-gray-100">
+    <section className="py-24 bg-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -54,7 +54,7 @@ const TrustSection: React.FC = () => {
           {features.map((feature, index) => {
             const Icon = feature.icon;
             return (
-              <div key={index} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group h-full">
+              <div key={index} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group h-full">
                 <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 ${getColorClasses(feature.color)}`}>
                   <Icon className="w-7 h-7" />
                 </div>
